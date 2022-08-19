@@ -19,28 +19,35 @@
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard.routes')" :active="request()->routeIs('dashboard.routes')">
-                        {{ __('Routes') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('tickets.userindex')" :active="request()->routeIs('tickets.userindex')">
                         {{ __('Bus Routes') }}
                     </x-nav-link>
                 </div>
-
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Booking') }}
+                    <x-nav-link :href="route('dashboard.booking')" :active="request()->routeIs('dashboard.booking')">
+                        {{ __('Book a Ticket') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('bookings.bookingcompleted')" :active="request()->routeIs('bookings.bookingcompleted')">
+                        {{ __('My Booking History') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('bookings.miscellaneous')" :active="request()->routeIs('bookings.miscellaneous')">
+                        {{ __('Miscellaneous') }}
+                    </x-nav-link>
+                </div>
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard.myprofile')" :active="request()->routeIs('dashboard.myprofile')">
                         {{ __('My Profile') }}
                     </x-nav-link>
                 </div>
-                
             </div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -70,7 +77,10 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
-            </div>
+            </div>/
+
+            
+            </form>
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">

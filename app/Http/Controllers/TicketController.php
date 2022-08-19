@@ -27,6 +27,12 @@ class TicketController extends Controller
         return view('tickets.userindex', compact('tickets'));
     }
 
+    public function guestindex()
+    {   
+        $tickets = DB::table('tickets')->get();
+        return view('tickets.guestindex', compact('tickets'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -74,6 +80,11 @@ class TicketController extends Controller
     public function show(Ticket $ticket)
     {
         return view('tickets.show', compact('ticket'));
+    }
+
+    public function usershow(Ticket $ticket)
+    {
+        return view('tickets.usershow', compact('ticket'));
     }
 
     /**

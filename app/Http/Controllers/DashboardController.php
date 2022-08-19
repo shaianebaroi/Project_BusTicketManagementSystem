@@ -21,13 +21,17 @@ class DashboardController extends Controller
         return view ('myprofile');
     }
 
-    public function routes(){
+    public function booking(){
         if(Auth::user()->hasRole('user')){
-            return view ('tickets.userindex');
+            return redirect()->route('tickets.userindex');
         }
         elseif(Auth::user()->hasRole('admin')){
             return redirect()->route('tickets.index');
         }
+    }
+    
+    public function routes(){
+        return redirect()->route('tickets.guestindex');
     }
 
 }

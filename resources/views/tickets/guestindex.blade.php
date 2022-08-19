@@ -3,7 +3,7 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Book Tickets</h1>
+        <h1 class="h2">Bus Routes</h1>
         <!--
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
@@ -34,7 +34,6 @@
               <th scope="col">Bus Type</th>
               <th scope="col">No. of Seats</th>
               <th scope="col">Ticket Price</th>
-              <th scope="col">Status</th>
 
             </tr>
           </thead>
@@ -52,9 +51,6 @@
             <td> {{ $ticket->ticket_price}} </td>
             
             <!--<td><a href = "/tickets/{{ $ticket->ticket_id }}" class = "btn btn-primary">Update</a></td>-->
-            <td> 
-            <a button type="button" class="btn btn-primary" onclick = "location.href = '/tickets/usershow/{{ $ticket->ticket_id }}' ">Book Now</button></a>
-            </td>
           </tr>
           @endforeach 
           </tbody>

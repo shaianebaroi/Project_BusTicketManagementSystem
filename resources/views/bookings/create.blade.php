@@ -61,11 +61,6 @@
         </div>
 
         <div class = "form-group">
-          <label for = "seat_no"> Seat No. </label>
-          <input type = "text" id = "seat_number" name = "seat_number" class = "form-control"/>
-        </div>
-
-        <div class = "form-group">
           <label for = "status"> Status </label>
           <input type = "text" id = "status" name = "status" class = "form-control"/>
         </div>

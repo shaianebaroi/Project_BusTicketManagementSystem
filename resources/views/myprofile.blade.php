@@ -16,8 +16,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     
                 <form action = "" method ="post">
-                    {{ csrf_field() }}
-
+                   
                     <div class = "form-group">
                     <label for = "{{Auth::user()->name}}"> Name </label>
                     <input type = "text" id = "{{Auth::user()->name}}" name = "{{Auth::user()->name}}" class = "form-control" value = "{{Auth::user()->name}}" disabled />
@@ -27,9 +26,6 @@
                     <label for = "{{Auth::user()->email}}"> Email Address </label>
                     <input type = "text" id = "{{Auth::user()->email}}" name = "{{Auth::user()->email}}" class = "form-control" value = "{{Auth::user()->email}}" disabled />
                     </div>
-
-                    <button type="button" class="btn btn-primary">Edit Profile</button>
-                    <a href = "{{ route('tickets.index') }}" class = "btn btn-secondary"> Back </a>
                 </form>
                 </div>
             </div>
