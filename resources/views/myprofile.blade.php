@@ -29,6 +29,8 @@
                 </form>
                 </div>
             </div>
+            <br>
+            <a href = "{{ route('dashboard') }}" class = "btn btn-secondary"> Back </a>
         </div>
     </div>
 </x-app-layout>

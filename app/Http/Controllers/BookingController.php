@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use Illuminate\Http\Request;
-
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
- 
+
+use App\Models\Booking;
+use App\Http\Controllers\Controller;
+require_once("config.php");
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+     public function index()
     {
        //
     }
@@ -24,22 +20,21 @@ class BookingController extends Controller
     public function bookingcompleted()
     {
         if(Auth::user()->hasRole('user')){
-            $bkings = \DB::table('bookings')->where('user_id', auth()->id())->get();
+            $bkings = \DB::table('bookings')->where('user_id', auth()->id())->latest()->get();
             return view('bookings.bookingcompleted', compact('bkings'));
         }
         elseif(Auth::user()->hasRole('admin')){
 
             return view ('dashboard');
-            $bkings = \DB::table('bookings');
+            $bkings = \DB::table('bookings')->latest()->get();
             return view('bookings.history', compact('bkings'));
     }
-    }
-    
+    }  
 
     public function bookinghistory()
     {
-        $bkings = \DB::table('bookings');
-        return view('bookings.history', compact('bkings'));
+        $bkings = \DB::table('bookings')->latest()->get();
+        return view('bookings.bookinghistory', compact('bkings'));
     }
 
     /**
@@ -59,7 +54,11 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        if (request('seat_number') > request('bus_seats')){
+            return redirect()->route('bookings.bookingcompleted')->with('Please enter a valid seat number.');
+        }
+
         Booking::create([
             'origin' => request('origin'),
             'destination' => request('destination'),
@@ -96,7 +95,7 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        //
+        return view('bookings.show', compact('booking'));
     }
 
     /**
@@ -118,8 +117,19 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Booking $booking)
-    {
-        //
+    {   
+        $booking->origin = request('origin');
+        $booking->destination = request('destination');
+        $booking->date = request('date');
+        $booking->time = request('time');
+        $booking->bus_no = request('bus_no');
+        $booking->ticket_price = request('ticket_price');
+        $booking->seat_number = request('seat_number');
+        $booking->status = request('status');
+        $booking->user_id = request('user_id');
+        $booking->save();
+
+        return redirect()->route('bookings.bookinghistory');
     }
 
     /**
@@ -141,6 +151,55 @@ class BookingController extends Controller
      public function destroy(Booking $booking)
     {
         $booking->delete();
-        return redirect()->route('dashboard');
+        return redirect()->route('bookings.bookingcompleted');
     }
+
+    public function bookingticket(Booking $booking)
+    {
+        return view('bookings.bookingticket', compact('booking'));
+    }
+
+    public function storetickets(Request $request)
+    {   
+        if (request('seat_number') > request('bus_seats')){
+            return redirect()->route('bookings.bookingcompleted')->with('Please enter a valid seat number.');
+        }
+
+        /*$u = request('seat_number');
+        $query = "SELECT * FROM bookings WHERE seat_number = '$u' AND status == 'PAID'";
+        $result = mysql_query($query);
+        if ($result != 'null')
+        {
+            return redirect()->route('bookings.bookingcompleted')->with('Please enter a valid seat number.');
+        }
+        */
+
+        if (request('seat_number') == null){
+            return redirect()->route('bookings.bookingcompleted')->with('Please enter a valid seat number.');
+        }
+
+    
+        Booking::create([
+            'origin' => request('origin'),
+            'destination' => request('destination'),
+            'time' => request('time'),
+            'date' => request('date'),
+            'bus_no' => request('bus_no'),
+            'bus_type' => request('bus_type'),
+            'bus_seats' => request('bus_seats'),
+            'ticket_price' => request('ticket_price'),
+            'seat_number' => request('seat_number'),
+            'status' => request('status')            
+        ]);
+
+        return redirect()->route('bookings.bookingcompleted');
+    }
+    /*
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->call(function () {
+            Booking::where('updated_at', '<', Carbon::now()->subDays(3))->delete();
+        })->weekly();
+    }
+    */
 }

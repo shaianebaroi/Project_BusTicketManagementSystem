@@ -135,4 +135,44 @@ class TicketController extends Controller
         $ticket->delete();
         return redirect()->route('tickets.index');
     }
+
+    public function storetickets(Request $request)
+    {   
+        Ticket::create([
+            'origin' => request('origin'),
+            'destination' => request('destination'),
+            'date' => request('date'),
+            'time' => request('time'),
+            'bus_no' => request('bus_no'),
+            'bus_type' => request('bus_type'),
+            'bus_seats' => request('bus_seats'),
+            'ticket_price' => request('ticket_price'),
+            'status' => request('status')
+        ]);
+
+        return redirect()->route('tickets.index');
+    }
+    public function updatetickets(Request $request, Ticket $ticket)
+    {  
+        $ticket->origin = request('origin');
+        $ticket->destination = request('destination');
+        $ticket->date = request('date');
+        $ticket->time = request('time');
+        $ticket->bus_no = request('bus_no');
+        $ticket->bus_type = request('bus_type');
+        $ticket->bus_seats = request('bus_seats');
+        $ticket->ticket_price = request('ticket_price');
+        $ticket->status = request('status');
+        $ticket->save();
+
+        return redirect()->route('tickets.index');
+    }
+
+    public function destroytickets(Ticket $ticket)
+    {  
+        $ticket->delete();
+        return redirect()->route('tickets.index');
+    }
+
+    
 }

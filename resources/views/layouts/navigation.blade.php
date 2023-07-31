@@ -17,23 +17,41 @@
                     </x-nav-link>
                 </div>
                 
+                @if (Auth::user()->hasRole('user'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard.routes')" :active="request()->routeIs('dashboard.routes')">
                         {{ __('Bus Routes') }}
                     </x-nav-link>
                 </div>
-                
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard.booking')" :active="request()->routeIs('dashboard.booking')">
                         {{ __('Book a Ticket') }}
                     </x-nav-link>
                 </div>
-
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('bookings.bookingcompleted')" :active="request()->routeIs('bookings.bookingcompleted')">
                         {{ __('My Booking History') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard.myprofile')" :active="request()->routeIs('dashboard.myprofile')">
+                        {{ __('My Profile') }}
+                    </x-nav-link>
+                </div>
+                @endif 
+
+                @if (Auth::user()->hasRole('admin'))          
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard.booking')" :active="request()->routeIs('dashboard.booking')">
+                        {{ __('Bus Routes') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('bookings.bookinghistory')" :active="request()->routeIs('bookings.bookinghistory')">
+                        {{ __('Users Booking History') }}
+                    </x-nav-link>
+                </div>
+                @endif
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('bookings.miscellaneous')" :active="request()->routeIs('bookings.miscellaneous')">
@@ -41,11 +59,7 @@
                     </x-nav-link>
                 </div>
                 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.myprofile')" :active="request()->routeIs('dashboard.myprofile')">
-                        {{ __('My Profile') }}
-                    </x-nav-link>
-                </div>
+                
             </div>
 
 
@@ -77,7 +91,7 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
-            </div>/
+            </div>
 
             
             </form>

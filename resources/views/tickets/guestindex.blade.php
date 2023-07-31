@@ -1,61 +1,45 @@
 @extends('layouts.main')
 
-@section('content')
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Bus Routes</h1>
-        <!--
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            This week
-          </button>
-        </div>
-        -->
-      </div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Bus Routes') }}
+        </h2>
+    </x-slot>
 
-      <!--
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-      -->
-
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Origin</th>
-              <th scope="col">Destination</th>
-              <th scope="col">Date</th>
-              <th scope="col">Time</th>
-              <th scope="col">Bus No.</th>
-              <th scope="col">Bus Type</th>
-              <th scope="col">No. of Seats</th>
-              <th scope="col">Ticket Price</th>
-
-            </tr>
-          </thead>
-          <tbody>
-          
-          @foreach ($tickets as $ticket)
+    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
           <tr>
-            <td> {{ $ticket->origin }} </td>
-            <td> {{ $ticket->destination }} </td>
-            <td> {{ $ticket->date }} </td>
-            <td> {{ $ticket->time }} </td>
-            <td> {{ $ticket->bus_no }} </td>
-            <td> {{ $ticket->bus_type }} </td>
-            <td> {{ $ticket->bus_seats}} </td>
-            <td> {{ $ticket->ticket_price}} </td>
-            
-            <!--<td><a href = "/tickets/{{ $ticket->ticket_id }}" class = "btn btn-primary">Update</a></td>-->
+            <th scope="col">Origin</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Bus No.</th>
+            <th scope="col">Bus Type</th>
+            <th scope="col">No. of Seats</th>
+            <th scope="col">Ticket Price</th>
           </tr>
-          @endforeach 
-          </tbody>
-        </table>
-      </div>
-    </main>
-@endsection
+        </thead>
+                
+        @foreach ($tickets as $ticket)
+        <tr>
+          <td> {{ $ticket->origin }} </td>
+          <td> {{ $ticket->destination }} </td>
+          <td> {{ $ticket->date }} </td>
+          <td> {{ $ticket->time }} </td>
+          <td> {{ $ticket->bus_no }} </td>
+          <td> {{ $ticket->bus_type }} </td>
+          <td> {{ $ticket->bus_seats}} </td>
+          <td> {{ $ticket->ticket_price}} </td>
+        </tr>
+        @endforeach 
+
+      </table>
+      <a href = "{{ route('dashboard') }}" class = "btn btn-secondary"> Back </a>
+    </div>
+    </div>
+</x-app-layout>
+
 

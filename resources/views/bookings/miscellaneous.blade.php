@@ -1,5 +1,5 @@
-@extends('layouts.main');
-@section('content');
+@extends('layouts.main')
+
 
 <x-app-layout>
     <x-slot name="header">
@@ -42,7 +42,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1> Seat Plan </h1>
                     <div class="container">
-                        <img src="images/seat-map.jpg" alt="" style="width:100%;">
+                        <img src="{{ URL ('images/seat-map.jpg') }}" alt="" style="width:100%;">
                     </div>
                 </div>
             </div>
@@ -60,4 +60,8 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12 text-center">
+    <a href = "{{ route('dashboard') }}" class = "btn btn-secondary"> Back </a>
+    </div>
+    
 </x-app-layout>

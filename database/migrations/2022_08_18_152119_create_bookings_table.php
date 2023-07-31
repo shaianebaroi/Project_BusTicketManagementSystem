@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('bus_seats');
             $table->integer('ticket_price');
             $table->integer('seat_number');
-            $table->boolean('status');
+            $table->string('status');
             $table->timestamps();
         });
     }
